@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Uruguay Maps</title>
+        <h1 id="heading">2011 Population Density of Uruguay</h1>
+        <button type="button" id="toggle" onclick="togges()">See Annual Rainfall Map</button>
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+<!--		<script type="text/javascript" 	src="d3.js"></script>-->
+<!--        <script type="text/javascript" 	src="ury.js"></script>-->
+        <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+        <script src="https://d3js.org/topojson.v2.min.js"></script>
+		<style type="text/css">
+            button {
+                background-color: orangered; /* Green */
+                border: none;
+                color: wheat;
+                padding: 15px 12px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+            }
+            h1 {
+                font-family: Verdana, sans-serif;
+            }
+            a {
+                font-size:  1.17em
+            }
+
+            footer {
+                height: 0%;
+                width: 100%;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                transform: translateY(-115);
+                margin-left: 50px;
+            }
+		</style>
+	</head>
+	<section> 
+    <script type="text/javascript">
+
+        var togged = false;
+        rest();
+        
+        console.log("first")
+        console.log(togged)
+        function togges() {
+            if (togged == false) {
+                console.log("switched to True rain")
+                togged = true;
+                document.querySelector('#toggle').innerText = 'See Population Density Map';
+                document.getElementById('heading').innerHTML = '1982-2012 Annual Rainfall of Uruguay';
+                
+            }
+            else {
+                console.log("switched to False pop")
+                togged = false;
+                document.querySelector('#toggle').innerText = 'See Annual Rainfall Map';   
+                document.getElementById('heading').innerHTML = '2011 Population Density of Uruguay';
+            }
+            rest();
+        }
+        
+    function rest() {
+        //Width and height
+        var w = 1500;
+        var h = 1200;
+
+        var tdata;
+
+        //Load in GeoJSON data
+        d3.json("uruguay.json").then(function(json) {
+            // https://observablehq.com/@d3/u-s-map
+            tdata = topojson.feature(json, json.objects.gadm36_URY_1)
+            console.log("outline inputted")
+            console.log(tdata)
+            //Bind data and create one path per GeoJSON feature
+
+        // https://bl.ocks.org/mbostock/5126418
+        var path = d3.geoPath()
+                // https://github.com/d3/d3-geo-projection
+                .projection(d3.geoMercator()
+                // https://bl.ocks.org/mbostock/5126418
+//                    .rotate([74 + 30 / 60, -38 - 50 / 60])
+                .fitExtent([[20, 20], [940, 900]], tdata));
+            
+
+        //Create SVG element
+        var svg = d3.select("body")
+                    .append("svg")
+                    .attr("width", w)
+                    .attr("height", h);
+
+        // https://bl.ocks.org/mbostock/5562380
+        // Color Scale from cali
+        var x;
+        var color;
+        if (togged) {
+            x = d3.scaleSqrt()
+                .domain([36, 57])
+                .rangeRound([440, 950]);
+            color = d3.scaleThreshold()
+                .domain([36, 39, 42, 45, 48, 51, 54, 57])
+                .range(d3.schemeOrRd[9]);
+        } else {
+            x = d3.scaleSqrt()
+                .domain([0, 100])
+                .rangeRound([440, 950]);
+            color = d3.scaleThreshold()
+                .domain([4, 5, 6, 8, 10, 21, 100, 2000])
+                .range(d3.schemeOrRd[9]);
+        }
+        
+        var g = svg.append("g")
+            .attr("class", "key")
+            .attr("transform", "translate(50,100)");
+        g.selectAll("rect")
+          .data(color.range().map(function(d) {
+              d = color.invertExtent(d);
+              if (d[0] == null) d[0] = x.domain()[0];
+              if (d[1] == null) d[1] = x.domain()[1];
+              return d;
+            }))
+          .enter().append("rect")
+            .attr("height", 8)
+            .attr("x", function(d) { 
+            return x(d[0]); })
+            .attr("width", function(d) { 
+                if (x(d[0]) > 1000) {
+                    return 100
+                }
+                else {
+                    return x(d[1]) - x(d[0]); 
+                }
+            })
+            .attr("fill", function(d) { return color(d[0]); })
+        
+        var scaleTitle; // changes title of scale
+        if (togged) {
+            scaleTitle = "Yearly Rainfall Inches"
+        }
+        else {
+            scaleTitle = "Population Per km"
+        }
+        g.append("text")
+            .attr("class", "caption")
+            .attr("x", x.range()[0])
+            .attr("y", -6)
+            .attr("fill", "#000")
+            .attr("text-anchor", "start")
+            .attr("font-size", "30px")
+            .attr("font-weight", "bold")
+            .text(scaleTitle);
+        g.call(d3.axisBottom(x)
+            .tickSize(13)
+            .tickValues(color.domain()))
+          .select(".domain")
+            .remove();
+
+            
+         var csvData; 
+        if (togged) {
+           csvData = "ury_dept_c.csv";
+        } else {
+           csvData = "ury_dept_pd.csv";
+        }
+        //Load in csv data
+//            ury_dept_pd.csv
+        d3.csv(csvData).then(function(data) {
+            console.log("got csv")
+            //Set input domain for color scale
+//				color.domain([
+//					d3.min(data, function(d) { return d.value; }), 
+//					d3.max(data, function(d) { return d.value; })
+//				]);
+
+        for (var i = 0; i < data.length; i++) {
+            console.log("for")
+            //Grab state name
+            var dataState = data[i].dept;
+            console.log(dataState)
+            //Grab data value, and convert from string to float
+            var dataValue = parseFloat(data[i].value);
+            console.log(dataValue)
+            //Find the corresponding state inside the GeoJSON
+            console.log("json.features.length")
+            console.log(tdata.features.length)
+            for (var j = 0; j < tdata.features.length; j++) {
+                var jsonState = tdata.features[j].properties.NAME_1;
+                console.log(jsonState)
+                if (dataState == jsonState) {
+
+                    //Copy the data value into the JSON
+                    tdata.features[j].properties.value = dataValue;
+                    console.log("for value")
+                    console.log(tdata.features[j].properties.value)
+                    //Stop looking through the JSON
+                    break;
+
+                }
+            }		
+        } 
+        console.log(data)
+        console.log(data[1].value)
+
+        svg.selectAll("path")
+           .data(function() {
+                    console.log("in path")
+                    console.log(tdata)
+                return tdata.features
+            })
+           .enter()
+           .append("path")
+           .attr("d", path)
+           .style("fill", function(a) {
+            value = a.properties.value
+                console.log("colored")
+                return color(value);
+            });
+         });   
+        });
+        d3.select("svg").remove(); // reset to update to new map
+
+    }
+    </script>
+        </section>
+    <footer id="footer">
+            <a href="">GitHub</a>
+            <h3>Resources:</h3>
+            <a href="http://www5.ine.gub.uy/censos2011/index.html">Censos 2011, Instituto Nacional de Estadística</a>
+            <h5></h5>
+            <a href="https://en.climate-data.org/south-america/uruguay-191/">Uruguay Climate, Climate Data, 1982-2012</a>
+            <h3>Sriya Lingampalli</h3>
+            <h3>Instructor: Suresh Lodha</h3>
+            <h3>CSE 163: Data Programming for Visualization</h3>
+            <h3>Spring 2020</h3>
+    </footer>
+</html>
