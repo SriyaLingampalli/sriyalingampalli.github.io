@@ -302,6 +302,15 @@ var nodeUpdate = nodeEnter.merge(node);
   // Enter any new links at the parent's previous position.
   var linkEnter = link.enter().insert("path", "g")
       .attr("class", "link")
+  // path color change based on preq
+      .style("stroke", function(d) { 
+            if (d.data.preq == "true") {
+                return "#eeee00";
+            }
+            else {
+                return "lightsteelblue"; 
+            }
+      })
       .attr("d", function(d) {
         var o = {x: source.x0, y: source.y0};
         console.log("linkEnter o")
@@ -309,25 +318,18 @@ var nodeUpdate = nodeEnter.merge(node);
         return diagonal(o, o)
 //        return diagonal({source: o, target: o});
       });
-//      .style("stroke", function(d) { 
-//            if (d.data.dc == "true" || d.data.capstone == "true") {
-//                return "#66cd00";
-//            }
-//            else {
-//                return "lightsteelblue"; 
-//            }
-//      });
-    var linkUpdate = linkEnter.merge(link);
 
-//    linkUpdate.select("path")
-//        .style("stroke", function(d) { 
-//            if (d.data.dc == "true" || d.data.capstone == "true") {
-//                return "#66cd00";
-//            }
-//            else {
-//                return "lightsteelblue"; 
-//            }
-//      });
+    var linkUpdate = linkEnter.merge(link);
+// path color change based on preq
+    linkUpdate.select("path")
+        .style("stroke", function(d) { 
+            if (d.data.dc == "true" || d.data.capstone == "true") {
+                return "#eeee00";
+            }
+            else {
+                return "lightsteelblue"; 
+            }
+      });
         
   // Transition links to their new position.
   linkUpdate.transition()

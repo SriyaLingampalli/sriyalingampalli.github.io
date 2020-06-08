@@ -11,6 +11,10 @@ span {
     display: inline-block;
 }
 
+span.legText {
+    padding-right: 5px;
+}
+
 #dc {
     height: 15px;
     width: 15px;
@@ -25,6 +29,15 @@ span {
     background-color: #f7072f;
     border-radius: 50%;
     display: inline-block;
+}
+
+#sline {
+    height: 5px;
+    width: 20px;
+    background-color: #eeee00;
+/*    border-radius: 50%;*/
+    display: inline-block;
+    margin-bottom: 4px;
 }
 
 h1 {

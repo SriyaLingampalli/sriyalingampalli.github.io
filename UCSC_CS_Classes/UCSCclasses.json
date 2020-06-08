@@ -51,37 +51,48 @@
      "children": [
       {"name": "Graphics", 
       "children": [
-        {"name": "Introduction to Computer Graphics/Lab (CSE 160/L)", "num": "CSE 160/L", "size": "modeling, rendering computer-generated imagery", "capstone": "true", "elec": true},
-        {"name": "Game Design Studio III (CMPM 172)", "num": "CMPM 172", "size": "design, implement, and test a computer game", "capstone": "true", "elec": true}
+        {"name": "Introduction to Computer Graphics/Lab (CSE 160/L)", "num": "CSE 160/L", "size": "modeling, rendering computer-generated imagery", "capstone": "true", "elec": true}
       ], "elec": true
       },
       {"name": "Data-Driven", 
       "children": [
-        {"name": "Data Programming for Visualization (CSE 163)", "num": "CSE 163", "size": "create interactive web visualizations using data", "capstone": "true", "elec": true},
-        {"name": "Database Systems II (CSE 181)", "num": "CSE 181", "size": "architecture and implementation", "capstone": "true", "elec": true},
-        {"name": "Data Wrangling and Web Scraping (CSE 184)", "num": "CSE 184", "size": "data extraction, cleaning, and manipulation", "capstone": "true", "elec": true}
+        {"name": "Introduction to Data Mining (CSE 145)", "num": "CSE 145", "size": "learn techniques, algorithms, and applications like preprocessing, exploration, classification, clustering, mining text, and sequential/social data", "elec": true},
+        {"name": "Data Programming for Visualization (CSE 163)", "num": "CSE 163", "size": "create interactive web visualizations using data", "preq": "true", "capstone": "true", "elec": true},
+        {"name": "Database Systems I (CSE 180)", "num": "CSE 180", "size": "learn concepts, approaches, tools, and methodology of database design", "elec": true},
+        {"name": "Database Systems II (CSE 181)", "num": "CSE 181", "size": "architecture and implementation of databases", "capstone": "true", "elec": true},
+        {"name": "Introduction to Database Management Systems (CSE 182)", "num": "CSE 182", "size": "explore entity-relationship, relational, XML data model, normal forms, SQL, etc.", "elec": true},
+        {"name": "Data Wrangling and Web Scraping (CSE 184)", "num": "CSE 184", "size": "data extraction, cleaning, and manipulation", "preq": "true", "capstone": "true", "elec": true}
       ], "elec": true
       },
       {"name": "Programming", 
        "children": [
         {"name": "Computability and Computational Complexity (CSE 104/W)", "num": "CSE 104/W", "size": "Turing machines, Chomsky hierarchy, Halting problem, NP-completeness, etc", "elec": true},
-        {"name": "Advanced Programming (CSE 111)", "num": "CSE 111", "size": "introduction to object-oriented techniques including data abstraction, inheritance, polymorphism, etc.", "elec": true}
+        {"name": "Applied Graph Theory and Algorithms (CSE106)", "num": "CSE 106", "size": "explore trees, Eulerian and Hamiltonian graphs, graph transversal to solve problems in connectivity, routing, etc.", "elec": true},
+        {"name": "Advanced Programming (CSE 111)", "num": "CSE 111", "size": "introduction to object-oriented techniques including data abstraction, inheritance, polymorphism, etc.", "elec": true},
+        {"name": "Computer Security (CSE 132)", "num": "CSE 132", "size": "introduction to computer/network security like access control, security in programming languages, basic cryptography, and ecurity protocols", "elec": true}
         ], "elec": true
       },
       {"name": "Machine Learning", 
        "children": [
         {"name": "Artificial Intelligence (CSE 140)", "num": "CSE 140", "size": "machine learning, optimization problems, computational methods, etc.", "capstone": "true", "elec": true},
+        {"name": "Machine Learning and Data Mining (CSE 142)", "num": "CSE 142", "size": "machine learning algorithms and their application in online learning, boosting, nearest neighbor techniques, etc.", "elec": true},
         {"name": "Introduction to Natural Language Processing (CSE 143)", "num": "CSE 143", "size": "programs that generate and learn natural languages", "capstone": "true", "elec": true},
         {"name": "Applied Machine Learning (CSE 144)", "num": "CSE 144", "size": "statistical inference to various complex model networks", "capstone": "true", "elec": true}
         ], "elec": true
       }, 
       {"name": "System Design", 
       "children": [
-        {"name": "Microprocessor System Design/Lab (CSE 121/L)", "num": "CSE 121/L", "size": "microprocessor and microcontroller architecture, etc.", "capstone": "true", "elec": true},
-        {"name": "Distributed Systems (CSE 138)", "num": "CSE 138", "size": "communication, naming, synchronization, etc.", "capstone": "true", "elec": true},
-        {"name": "Network Programming/Lab (CSE 156/L)", "num": "CSE 156/L", "size": "methods & tools ex. network protocal support", "capstone": "true", "elec": true},
         {"name": "Fundamentals of Compiler Design I (CSE 110A)", "num": "CSE 110A", "size": "Introduction to study of compiler implementation", "elec": true},
         {"name": "Fundamentals of Compiler Design II (CSE 110B)", "num": "CSE 110B", "size": "Advanced study of compiler implementation", "capstone": "true", "elec": true},
+        {"name": "Parallel Programming (CSE 113)", "num": "CSE 113", "size": "explore topics like types of parallel computers and programming platforms from design, implementation, to optimization, etc.", "preq": "true", "elec": true},
+        {"name": "Microprocessor System Design/Lab (CSE 121/L)", "num": "CSE 121/L", "size": "microprocessor and microcontroller architecture, etc.", "capstone": "true", "elec": true},
+        {"name": "Introduction to VLSI Digital System Design (CSE 122)", "num": "CSE 122", "size": "explore very large scale integrated custom integrated circuits, learning about semiconductor manufacturing, logic families, etc.", "elec": true},
+        {"name": "Logic Design with Verilog (CSE 125/L)", "num": "CSE 125/L", "size": "design and verify systems with emphasis on ASIC and FPGA Verilog digital logic design", "elec": true},
+        {"name": "Embedded Operating Systems (CSE 134)", "num": "CSE 134", "size": "explore the internal design of an embedded operating systems kernel", "preq": "true", "elec": true},
+        {"name": "Distributed Systems (CSE 138)", "num": "CSE 138", "size": "communication, naming, synchronization, etc.", "capstone": "true", "elec": true},
+        {"name": "Introduction to Computer Networks (CSE 150/L)", "num": "CSE 150/L", "size": "addresses issues arising in organizing communications among autonomous computers", "preq": "true", "elec": true},
+        {"name": "Advanced Computer Networks (CSE 151/L)", "num": "CSE 151/L", "size": "in-depth coverage CSE 150 topics like routing, transport, internetworking, plus wireless, application-layer services, security", "preq": "true", "elec": true},
+        {"name": "Network Programming/Lab (CSE 156/L)", "num": "CSE 156/L", "size": "methods & tools ex. network protocal support", "capstone": "true", "elec": true},
         {"name": "Introduction to Mechatronics/Lab (ECE 118/L)", "num": "ECE 118/L", "size": "designing intelligent electro-mechanical systems", "capstone": "true", "elec": true}
       ], "elec": true
       },
@@ -91,11 +102,15 @@
         {"name": "Software Design Project I (CSE 115B)", "num": "CSE 115B", "size": "specify, design, construct, test, and document a complete software system in a specialized application domain", "elec": true},
         {"name": "Software Design Project II (CSE 115C)", "num": "CSE 115C", "size": "develop, test, document, and deploy substantial software project", "capstone": "true", "elec": true},
         {"name": "Mobile Applications (CSE 118)", "num": "CSE 118", "size": "SDK, native methodologies, platform and server division, etc.", "capstone": "true", "elec": true},
+        {"name": "Engineering Design Project I & II (CSE 123A&B)", "num": "CSE 123A&B", "size": "two-course sequence to apply research, planning, procurement, and more skills for a substantial project", "preq": "true", "elec": true},
+        {"name": "Internet of Things (CSE 157)", "num": "CSE 157", "size": "concepts and techniques in the design of IoT like dominant architectures, protocols, wireless infrastructure, security etc.", "preq": "true", "elec": true},
+        {"name": "Mobile Sensing and Interaction (CSE 167)", "num": "CSE 167", "size": "hands-on knowledge and experience with modern mobile computing platforms for sensing and interactions tasks", "elec": true},
         {"name": "Web Applications (CSE 183)", "num": "CSE 183", "size": "build and design web apps", "capstone": "true", "elec": true}
       ], "elec": true
       },
       {"name": "Research & Industry", 
       "children": [
+        {"name": "Ethics & Algorithms (CSE 146)", "num": "CSE 146", "size": "introduction to data-driven and algorithmic decision making and ethical frameworks for evaluating automated systems", "elec": true},
         {"name": "Technical Writing and Communication in CS (CSE 185S/E)", "num": "CSE 185S/E", "size": "exercise writing to engineers", "dc": "true", "elec": true},
         {"name": "Senior Thesis (CSE 195)", "num": "CSE 195", "size": "perform self-driven research", "dc": "true", "elec": true}
       ], "elec": true
