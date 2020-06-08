@@ -1,7 +1,9 @@
-var margin = {top: 20, right: 120, bottom: 20, left: 120},
-    width = 1560 - margin.right - margin.left,
-    height = 900 - margin.top - margin.bottom;
+var margin = {top: 8, right: 120, bottom: 20, left: 120},
+    width = 1360 - margin.right - margin.left,
+    height = 800 - margin.top - margin.bottom;
 
+var originalWidth = 1360;
+var originalHeight = 800;
 
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.right + margin.left)
@@ -20,48 +22,50 @@ console.log(svg)
 //    .style("fill", "#fff")
 //    .style("opacity", 0.8);
 
-svg.append("text")
-    .text("Required")
-    .attr("x", 0.815*width)
-    .attr("y", 0.3*height)
-    .style("fill", "#fff")
-    .style("font-family", "sans-serif");
-
-svg.append("circle")
-    .attr("class", "dot")
-    .attr("r", 10)
-    .attr("cx", 0.865*width)
-    .attr("cy", 0.295*height)
-    .style("fill", "#66cd00");
-
-svg.append("text")
-    .text("DC")
-    .attr("x", 0.815*width)
-    .attr("y", 0.35*height)
-    .style("fill", "#fff")
-    .style("font-family", "sans-serif");  
-
-svg.append("circle")
-    .attr("class", "dot")
-    .attr("r", 10)
-    .attr("cx", 0.865*width)
-    .attr("cy", 0.345*height)
-    .style("fill", "#f7872f");
-    
-svg.append("text")
-    .text("Capstone")
-    .attr("x", 0.815*width)
-    .attr("y", 0.4*height)
-    .style("fill", "#fff")
-    .style("font-family", "sans-serif");  
-
-svg.append("circle")
-    .attr("class", "dot")
-    .attr("r", 10)
-    .attr("cx", 0.865*width)
-    .attr("cy", 0.395*height)
-    .style("fill", "#f7072f");
-
+// Add Legend, Moved to HTML to be Adaptable to Window Size
+//svg.append("text")
+//    .text("Required")
+//    .attr("x", 0.43*originalWidth)
+//    .attr("y", 0.005*originalHeight)
+//    .style("fill", "#fff")
+//    .style("font-family", "sans-serif");
+//
+//svg.append("circle")
+//    .attr("class", "dot")
+//    .attr("r", 5)
+//    .attr("cx", 0.415*originalWidth)
+//    .attr("cy", 0)
+//    .style("fill", "#66cd00");
+//
+//svg.append("text")
+//    .text("DC")
+//    .attr("x", 0.53*originalWidth)
+//    .attr("y", 0.005*originalHeight)
+//    .style("fill", "#fff")
+//    .style("font-family", "sans-serif");  
+//
+//svg.append("circle")
+//    .attr("class", "dot")
+//    .attr("r", 5)
+//    .attr("cx", 0.515*originalWidth)
+//    .attr("cy", 0)
+//    .style("fill", "#f7872f");
+//    
+//svg.append("text")
+//    .text("Capstone")
+////    .attr("x", 0.63*width)
+//    .attr("x", 0.59*originalWidth)
+//    .attr("y", 0.005*originalHeight)
+//    .style("fill", "#fff")
+//    .style("font-family", "sans-serif");  
+//
+//svg.append("circle")
+//    .attr("class", "dot")
+//    .attr("r", 5)
+////    .attr("cx", 0.615*width)
+//    .attr("cx", 0.575*originalWidth)
+//    .attr("cy", 0)
+//    .style("fill", "#f7072f");
 
 var i = 0,
     duration = 750,
@@ -75,7 +79,7 @@ var tree = d3.tree()
 // Add tooltip div
 var div = d3.select("body").append("div")
     .attr("class", "tooltip")
-    .style("opacity", 1e-6);
+    .style("opacity", 1e-10);
 //
 //var diagonal = d3.svg.diagonal()
 //    .projection(function(d) { return [d.y, d.x]; });
@@ -89,7 +93,16 @@ function diagonal(s, d) {
               ${d.y} ${d.x}`
 
     return path
-  }
+}
+
+//function diagonal(s, d) {
+//    path = `M ${s.y} ${s.x}
+//            C ${(s.y + d.y) / 2} ${s.x},
+//              ${d.y} ${d.x},
+//              ${d.y} ${d.x}`
+//
+//    return path
+//}
 
 var shown = false;
     
@@ -138,7 +151,19 @@ console.log(treeData)
       links = treeData.descendants().slice(1);
 
   // Normalize for fixed-depth.
-  nodes.forEach(function(d) { d.y = d.depth * 180; });
+  nodes.forEach(function(d) { 
+      console.log("poo"); 
+      console.log(d.depth); 
+      console.log(d.data.name);
+        if (d.data.elec) {
+            console.log("boosted")
+          d.y = d.depth * 250;
+        }
+        else {
+          "regular"
+          d.y = d.depth * 100; 
+        }
+  });
 
   // Update the nodes…
   var node = svg.selectAll("g.node")
@@ -147,7 +172,9 @@ console.log(treeData)
   // Enter any new nodes at the parent's previous position.
   var nodeEnter = node.enter().append("g")
       .attr("class", "node")
-      .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+      .attr("transform", function(d) {           
+            return "translate(" + source.y0 + "," + source.x0 + ")"; 
+      })
       .on("click", click)
       .on("mouseover", function(d){mouseover(d);})
       .on("mousemove", function(d){mousemove(d);})
@@ -175,7 +202,7 @@ console.log(treeData)
 //      });
 
   nodeEnter.append("circle")
-      .attr("r", 1e-6)
+      .attr("r", 1e-10)
 //      .attr("stroke", "#f7872f")
       .style("stroke", function(d) { 
             if (d.data.dc == "true") {
@@ -186,6 +213,9 @@ console.log(treeData)
             }
             else if (d.data.required == "true") {
                 return "#66cd00";
+            }
+            else if (d.data.name == "") {
+                return "#000";
             }
             else {
                 return "lightsteelblue"; 
@@ -201,6 +231,9 @@ console.log(treeData)
             else if (d.data.required == "true") {
                 return "#66cd00";
             }
+            else if (d.data.name == "") {
+                return "#000";
+            }
             else {
                 return d._children ? "lightsteelblue" : "#fff"; 
             }
@@ -215,7 +248,7 @@ console.log(treeData)
         console.log("d.data.name");
         console.log(d.data.name);
         return d.data.name; })
-      .style("fill-opacity", 1e-6);
+      .style("fill-opacity", 1e-10);
     
 // ADDED
 var nodeUpdate = nodeEnter.merge(node);
@@ -238,6 +271,9 @@ var nodeUpdate = nodeEnter.merge(node);
             else if (d.data.required == "true") {
                 return "#66cd00";
             }
+            else if (d.data.name == "") {
+                return "#000";
+            }
             else {
                 return d._children ? "lightsteelblue" : "#fff"; 
             }
@@ -253,10 +289,10 @@ var nodeUpdate = nodeEnter.merge(node);
       .remove();
 
   nodeExit.select("circle")
-      .attr("r", 1e-6);
+      .attr("r", 1e-10);
 
   nodeExit.select("text")
-      .style("fill-opacity", 1e-6);
+      .style("fill-opacity", 1e-10);
 
   // Update the links…
   var link = svg.selectAll("path.link")
@@ -273,8 +309,26 @@ var nodeUpdate = nodeEnter.merge(node);
         return diagonal(o, o)
 //        return diagonal({source: o, target: o});
       });
+//      .style("stroke", function(d) { 
+//            if (d.data.dc == "true" || d.data.capstone == "true") {
+//                return "#66cd00";
+//            }
+//            else {
+//                return "lightsteelblue"; 
+//            }
+//      });
     var linkUpdate = linkEnter.merge(link);
 
+//    linkUpdate.select("path")
+//        .style("stroke", function(d) { 
+//            if (d.data.dc == "true" || d.data.capstone == "true") {
+//                return "#66cd00";
+//            }
+//            else {
+//                return "lightsteelblue"; 
+//            }
+//      });
+        
   // Transition links to their new position.
   linkUpdate.transition()
       .duration(duration)
@@ -323,7 +377,7 @@ function mousemove(d) {
 //    console.log(d.data.size)
     if (d.data.size != undefined) {
         div
-        .text("Description: " + d.data.size)
+        .html('<b>' + d.data.num + '</b>' + "<br/>" + d.data.size)
         .style("left", (d3.event.pageX ) + "px")
         .style("top", (d3.event.pageY) + "px");
     }
@@ -334,7 +388,7 @@ function mouseout(d) {
     if (d.data.size != undefined) {
         div.transition()
         .duration(300)
-        .style("opacity", 1e-6);
+        .style("opacity", 1e-10);
 //        div.remove();
     }
 }

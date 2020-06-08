@@ -1,75 +1,77 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="UCSCclasses.css">
+
 <title>UCSC Computer Science, B.S. Courses</title>
+<button id="seeAll" onclick="seeAllButton()">See All</button> 
+<h4>UCSC Computer Science, B.S. | Course Options</h4>
 
-<h1>UCSC Computer Science, B.S. Course Options
-    <div></div>
-    <button id="seeAll" onclick="seeAllButton()">See All</button>
-    <div></div>
-<a href="https://github.com/SriyaLingampalli/sriyalingampalli.github.io/tree/master/UCSC_CS_Classes">GitHub</a>
-</h1>
-<style>
-    
-    a {
-        font: 20px sans-serif;
-    }
-    
-    h1 {
-        color: white;
-        text-align: center;
-        font-family: sans-serif;
-    }
-    
-    button {
-        background: none;
-/*        shape-outside: ellipse();*/
-        border-radius: 16px;
-        height: 30px;
-        color: floralwhite;
-        border-color: floralwhite;
-        font-family: sans-serif;
-    }
-
-    body {
-        background-color: black;
-    }
-
-    .node {
-        cursor: pointer;
-    }
-
-    .node circle {
-        fill: #fff;
-        stroke: steelblue;
-        stroke-width: 1.5px;
-    }
-
-    .node text {
-        fill: white;
-        font: 12px sans-serif;
-    }
-
-    .link {
-        fill: none;
-        stroke: #ccc;
-        stroke-width: 1.5px;
-    }
-
-    div.tooltip {
-        position: absolute;
-        text-align: center;
-        color: black;
-        width: 200px;
-        height: 50px;
-        padding: 8px;
-        font: 10px sans-serif;
-        background-color: aliceblue;
-        border: solid 1px #aaa;
-        border-radius: 8px;
-        pointer-events: none;
-    }
-
-</style>
-<body>
+<div style="text-align:center">
+    <span id="req"></span>
+    <span>Required</span> 
+    <span id="dc"></span>
+    <span>DC</span> 
+    <span id="cap"></span>
+    <span>Capstone</span> 
+    <span class="dot"></span>
+</div>
 <script src="//d3js.org/d3.v5.min.js"></script>
 <script src="UCSCclasses.js"></script>
+<div> </div>
+
+
+<!--
+<nav>
+    <ul id="mainMenu">
+        <li><a href="https://github.com/SriyaLingampalli/sriyalingampalli.github.io/tree/master/UCSC_CS_Classes">GitHub</a></li>
+    </ul>
+</nav>
+-->
+
+<div class = "page-footer">
+    <div class="row">
+        <div class="column">Created By
+            <br>
+            <p>
+            Sriya Lingampalli 
+            <br>in collaboration with Professor Suresh Lodha 
+            <br>in CSE 163: Data Visualization, Spring 2020
+            <br><a href="https://github.com/SriyaLingampalli/sriyalingampalli.github.io/tree/master/UCSC_CS_Classes">GitHub</a>
+            </p>
+        </div>
+        <div class="column">Files
+            <p>
+            README.md
+            <br>UCSCclasses.html
+            <br>UCSCclasses.js
+            <br>UCSCclasses.css
+            </p>
+        </div>
+        <div class="column">
+            Data Sources
+                <p>
+                    <a href="https://undergrad.soe.ucsc.edu/sites/default/files/curriculum-charts/2019-07/CS_BS_19-20.pdf">CS B.S. 19-20 Curriculum Chart</a>
+                    <br><a href="https://courses.soe.ucsc.edu/courses/cse">CSE 19-20 Course Catalog</a>
+                    <br><a href="https://courses.soe.ucsc.edu/courses/cmpm">CMPM 19-20 Course Catalog</a>
+                    <br><a href="https://courses.soe.ucsc.edu/courses/am">AM 19-20 Course Catalog</a>
+                    <br><a href="https://courses.soe.ucsc.edu/courses/stat">STAT 19-20 Course Catalog</a>
+                    <br><a href="https://courses.soe.ucsc.edu/courses/ece">ECE 19-20 Course Catalog</a>
+                    <br><a href="https://www.math.ucsc.edu/courses/course-catalog.php">MATH Course Catalog</a>
+                    <br><a href="https://www.physics.ucsc.edu/academic-programs/courses/course-catalog.php">PHYS Course Catalog</a>
+                </p>
+        </div>
+        <div class="column">
+            Code Sources
+                <p>
+                    <a href="https://observablehq.com/@d3/collapsible-tree">Collapsible Tree Layout</a>
+                    <br><a href="https://gist.github.com/mbostock/4339083">Collapsible Tree Layout GitHub</a>
+                    <br><a href="https://d3-wiki.readthedocs.io/zh_CN/master/Tree-Layout">Tree Layout Commands</a>
+                    <br><a href="https://bl.ocks.org/d3noob/43a860bc0024792f8803bba8ca0d5ecd">D3 V4 Collapsible Tree</a>
+                    <br><a href="http://bl.ocks.org/anotherjavadude/2952964">Tree Tooltip</a>
+                    <br><a href="https://stackoverflow.com/questions/19297808/how-to-display-name-of-node-when-mouse-over-on-node-in-collapsible-tree-graph">Mouse Hover For Tree</a>
+                    <br><a href="https://books.google.com/books/about/Programming_with_JavaScript.html?id=TgOR-QiqpEYC">Programming with JavaScript</a>
+                    <br><a href="https://www.color-hex.com/color-names.html">Color Names</a>
+                </p>
+        </div>
+    </div>
+</div>
