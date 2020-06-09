@@ -12,60 +12,6 @@ var svg = d3.select("body").append("svg")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 console.log("svg")
 console.log(svg)
-//    
-//
-//var key = svg.append("rect")
-//    .attr("x", 0.8*width)
-//    .attr("y", 220)
-//    .attr("width", 150)
-//    .attr("height", 160)
-//    .style("fill", "#fff")
-//    .style("opacity", 0.8);
-
-// Add Legend, Moved to HTML to be Adaptable to Window Size
-//svg.append("text")
-//    .text("Required")
-//    .attr("x", 0.43*originalWidth)
-//    .attr("y", 0.005*originalHeight)
-//    .style("fill", "#fff")
-//    .style("font-family", "sans-serif");
-//
-//svg.append("circle")
-//    .attr("class", "dot")
-//    .attr("r", 5)
-//    .attr("cx", 0.415*originalWidth)
-//    .attr("cy", 0)
-//    .style("fill", "#66cd00");
-//
-//svg.append("text")
-//    .text("DC")
-//    .attr("x", 0.53*originalWidth)
-//    .attr("y", 0.005*originalHeight)
-//    .style("fill", "#fff")
-//    .style("font-family", "sans-serif");  
-//
-//svg.append("circle")
-//    .attr("class", "dot")
-//    .attr("r", 5)
-//    .attr("cx", 0.515*originalWidth)
-//    .attr("cy", 0)
-//    .style("fill", "#f7872f");
-//    
-//svg.append("text")
-//    .text("Capstone")
-////    .attr("x", 0.63*width)
-//    .attr("x", 0.59*originalWidth)
-//    .attr("y", 0.005*originalHeight)
-//    .style("fill", "#fff")
-//    .style("font-family", "sans-serif");  
-//
-//svg.append("circle")
-//    .attr("class", "dot")
-//    .attr("r", 5)
-////    .attr("cx", 0.615*width)
-//    .attr("cx", 0.575*originalWidth)
-//    .attr("cy", 0)
-//    .style("fill", "#f7072f");
 
 var i = 0,
     duration = 750,
@@ -84,8 +30,6 @@ var div = d3.select("body").append("div")
 //var diagonal = d3.svg.diagonal()
 //    .projection(function(d) { return [d.y, d.x]; });
 //    
-    console.log("tree")
-    console.log(tree)
 function diagonal(s, d) {
     path = `M ${s.y} ${s.x}
             C ${(s.y + d.y) / 2} ${s.x},
@@ -94,15 +38,6 @@ function diagonal(s, d) {
 
     return path
 }
-
-//function diagonal(s, d) {
-//    path = `M ${s.y} ${s.x}
-//            C ${(s.y + d.y) / 2} ${s.x},
-//              ${d.y} ${d.x},
-//              ${d.y} ${d.x}`
-//
-//    return path
-//}
 
 var shown = false;
     
@@ -179,31 +114,9 @@ console.log(treeData)
       .on("mouseover", function(d){mouseover(d);})
       .on("mousemove", function(d){mousemove(d);})
       .on("mouseout", function(d){mouseout(d);})
-        
-  
-  
-  
-  
-  
-//      .on("mouseover", function(d) {
-//      var g = d3.select(this); // The node
-//      // The class is used to remove the additional text later
-//      var info = g.append('text')
-//         .classed('info', true)
-//         .attr('x', 20)
-//         .attr('y', 20)
-////         .text('More info');
-//        .text(function(d) { 
-//        return d.data.size; })
-//      })
-//      .on("mouseout", function() {
-//      // Remove the info text on mouse out.
-//      d3.select(this).select('text.info').remove();
-//      });
 
   nodeEnter.append("circle")
       .attr("r", 1e-10)
-//      .attr("stroke", "#f7872f")
       .style("stroke", function(d) { 
             if (d.data.dc == "true") {
                 return "#f7872f";
@@ -243,7 +156,6 @@ console.log(treeData)
       .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
       .attr("dy", ".35em")
       .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-//      .text(function(d) { return d.name; })
       .text(function(d) { 
         console.log("d.data.name");
         console.log(d.data.name);
@@ -254,7 +166,7 @@ console.log(treeData)
 var nodeUpdate = nodeEnter.merge(node);
     
   // Transition nodes to their new position.
-//  var nodeUpdate = node.transition()
+  //  var nodeUpdate = node.transition()
   nodeUpdate.transition()
       .duration(duration)
       .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
@@ -296,13 +208,13 @@ var nodeUpdate = nodeEnter.merge(node);
 
   // Update the links…
   var link = svg.selectAll("path.link")
-//      .data(links, function(d) { return d.target.id; });
+     // .data(links, function(d) { return d.target.id; });
       .data(links, function(d) { return d.id; });
 
   // Enter any new links at the parent's previous position.
   var linkEnter = link.enter().insert("path", "g")
       .attr("class", "link")
-  // path color change based on preq
+      // path color change based on preq
       .style("stroke", function(d) { 
             if (d.data.preq == "true") {
                 return "#eeee00";
@@ -320,7 +232,7 @@ var nodeUpdate = nodeEnter.merge(node);
       });
 
     var linkUpdate = linkEnter.merge(link);
-// path color change based on preq
+    // path color change based on preq
     linkUpdate.select("path")
         .style("stroke", function(d) { 
             if (d.data.dc == "true" || d.data.capstone == "true") {
@@ -394,15 +306,6 @@ function mouseout(d) {
 //        div.remove();
     }
 }
-
-//function showall() {
-//    console.log("shhowing")
-//    var children = (root.children) ? root.children : root._children;
-//    click(root)
-//    if(children)
-//      children.forEach(click);
-//    update(root)
-//}
 
 function show(d){   
     var children = (d.children) ? d.children : d._children;
