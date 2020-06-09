@@ -20,7 +20,15 @@
       {"name": "Computer Architecture (CSE 120)", "num": "CSE 120", "size": "understand MIPS, ISA, and RISC and the evolution of CPU microarchitecture from single to multi-cycle pipelines", "required": "true"},
       {"name": "Principles of Computer Systems Design or Intro to Operating Systems (CSE 130 or CSE 131)", "num": "CSE 130 or 131", "size": "cover principles of computer-systems design and complexity, memory, synchronization, layering, etc.", "required": "true"}
      ]
-    }
+    },
+    {
+    "name": "Theory",
+    "children": [
+     {"name": "Introduction to Data Structures and Algorithms (CSE 101)", "num": "CSE 101", "size": "learn abstract data types and data structures like linked lists, stacks/queues, hash tables, trees, and evaluate big-Oh of algorithms", "required": "true"},
+     {"name": "Introduction to Analysis of Algorithms (CSE 102)", "num": "CSE 102", "size": "conduct construction and mathematical analysis of divide-and-conquer, greedy, and dynamic programming algorithms", "required": "true"},
+     {"name": "Computational Models (CSE 103)", "num": "CSE 103", "size": "represent regular languages using pumping lemmas, Turing machines, and learning Church-Turing thesis, etc.", "required": "true"}
+    ]
+   }
    ]
   },
   {
